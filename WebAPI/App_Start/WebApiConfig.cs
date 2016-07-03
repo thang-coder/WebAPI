@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web.Http;
+using WebAPI.Attributes;
 
 namespace WebAPI
 {
@@ -10,6 +9,7 @@ namespace WebAPI
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
+            TokenRequired.Realm = new Uri("https://www.contoso.com/login");
 
             // Web API routes
             config.MapHttpAttributeRoutes();

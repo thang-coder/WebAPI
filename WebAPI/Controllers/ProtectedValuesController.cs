@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
+using WebAPI.Attributes;
 
 namespace WebAPI.Controllers
 {
-    [Authorize]
+    [TokenRequired]
     public class ProtectedValuesController : ApiController
     {
         // GET api/ProtectedValues
