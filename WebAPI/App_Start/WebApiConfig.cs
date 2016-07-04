@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Security.Cryptography;
 using System.Web.Http;
 using WebAPI.Attributes;
+using WebAPI.SignatureTypes;
 
 namespace WebAPI
 {
@@ -8,8 +10,12 @@ namespace WebAPI
     {
         public static void Register(HttpConfiguration config)
         {
-            // Web API configuration and services
-            TokenRequired.Realm = new Uri("https://www.contoso.com/login");
+            // Authentication configurations
+            Hmac.Secret = "THIS IS A BIG SECRET"; // TODO: load secret string from config file
+
+            // there is no specific order for Use and Realm
+            TokenRequired.Use(typeof(HMACSHA256));
+            TokenRequired.Realm = new Uri("http://localhost:6301");
 
             // Web API routes
             config.MapHttpAttributeRoutes();
