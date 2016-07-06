@@ -16,8 +16,13 @@ using WebAPI.SignatureTypes;
 
 namespace WebAPI.ActionFilters
 {
+    /// <summary>
+    /// Add this attribute to a controller or action to enforce token-based authentication
+    /// </summary>
     public class TokenRequired : Attribute, IAuthenticationFilter
     {
+        #region Static members for configurations and initialization of reusable components
+
         static TokenRequired()
         {
             TokenValidator = new JwtSecurityTokenHandler();
@@ -48,7 +53,11 @@ namespace WebAPI.ActionFilters
             TokenValidations = validations;
         }
 
-        // Only one instance of this attribute can be applied to a single class or function.
+        #endregion
+
+        /// <summary>
+        /// Only one instance of this attribute can be applied to a single class or function
+        /// </summary>
         public bool AllowMultiple
         {
             get
@@ -57,6 +66,9 @@ namespace WebAPI.ActionFilters
             }
         }
 
+        /// <summary>
+        /// Deny access if a token is missing from the header Authorization, or invalid; otherwise, let the request goes through.
+        /// </summary>
         public Task AuthenticateAsync(HttpAuthenticationContext context, CancellationToken cancellationToken)
         {
             AuthenticationHeaderValue authentication = null;
@@ -83,12 +95,18 @@ namespace WebAPI.ActionFilters
             return Task.FromResult(0);
         }
 
+        /// <summary>
+        /// Return a challenge response with the realm included in the header WWW-Authenticate
+        /// </summary>
         public Task ChallengeAsync(HttpAuthenticationChallengeContext context, CancellationToken cancellationToken)
         {
             context.Result = new ChallengeResult(context.Result, Realm);
             return Task.FromResult(0);
         }
 
+        /// <summary>
+        /// The challenge response to unauthenticated requests
+        /// </summary>
         private class ChallengeResult : IHttpActionResult
         {
             private IHttpActionResult contextResult;
