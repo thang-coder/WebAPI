@@ -10,11 +10,11 @@ namespace WebAPI
     {
         public static void Register(HttpConfiguration config)
         {
-            // Authentication configurations
-            HmacSignatureFactory.Secret = "THIS IS A BIG SECRET"; // TODO: load secret string from config file
-
-            // there is no specific order for Use and Realm
+            // Configure the hashing function, then use it
+            HmacSignatureFactory.Secret = "eyJzdWIiOiJkY3RoYW5nQGdtYWlsLmNvbSIsIm5hbWUiOiJUaGFuZyBEdW9uZyIsImFkbWluIjp0cnVlfQ";
             TokenRequired.Use(typeof(HMACSHA256));
+
+            // Configure the realm for challenge responses
             TokenRequired.Realm = new Uri("http://localhost:6301");
 
             // Web API routes

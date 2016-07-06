@@ -12,18 +12,10 @@ namespace WebAPI.SignatureTypes
         // The hash function gets replaced every time the secret string changes.
         private static HMACSHA256 hashFunction;
 
-        // The signing and verifying key gets replaced every time the secret string changes.
-        private static SymmetricSecurityKey signingAndVerifyingKey;
-
         private static string secret;
 
-        static HmacSignatureFactory()
-        {
-            ValidationParameters = new TokenValidationParameters
-            {
-                SignatureValidator = verifySignature
-            };
-        }
+        // The signing and verifying key gets replaced every time the secret string changes.
+        private static SymmetricSecurityKey signingAndVerifyingKey;
 
         // Changing the secret string will reset the hash function.
         public static string Secret
@@ -40,30 +32,39 @@ namespace WebAPI.SignatureTypes
                 }
 
                 secret = value;
-                hashFunction = new HMACSHA256(Convert.FromBase64String(value));
+                hashFunction = new HMACSHA256(Encoding.UTF8.GetBytes(value));
                 signingAndVerifyingKey = new SymmetricSecurityKey(hashFunction.Key);
-
-                Trace.Assert(hashFunction.Key.Length > 127, "The algorithm: 'http://www.w3.org/2001/04/xmldsig-more#hmac-sha256' cannot have less than: '128' bits.");
             }
         }
 
+        // Define which properties of a JWT are required and how to validate the token's signature
         public static TokenValidationParameters ValidationParameters { get; internal set; }
 
-        private static string CreateSignature(JwtSecurityToken jwt)
+        // static constructor
+        static HmacSignatureFactory()
+        {
+            // Define which properties of a JWT are required and how to validate the token's signature
+            ValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = false,
+                ValidateAudience = false,
+                ValidateLifetime = false,
+                SignatureValidator = VerifySignature
+            };
+        }
+
+        public static string CreateSignature(JwtSecurityToken jwt)
         {
             if (jwt == null)
             {
                 throw new ArgumentNullException(nameof(jwt));
             }
-
-            Trace.Assert(!string.IsNullOrWhiteSpace(Secret), "Secret string is required for Hmac algorithm.");
-
             var protectedContent = Encoding.ASCII.GetBytes($"{jwt.EncodedHeader}.{jwt.EncodedPayload}");
             var hash = hashFunction.ComputeHash(protectedContent);
             return Base64UrlEncoder.Encode(hash);
         }
 
-        private static SecurityToken verifySignature(string token, TokenValidationParameters validationParameters)
+        public static SecurityToken VerifySignature(string token, TokenValidationParameters validationParameters)
         {
             JwtSecurityToken jwt = null;
             string computedSignature = null;
