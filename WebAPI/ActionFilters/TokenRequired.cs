@@ -14,7 +14,7 @@ using System.Web.Http.Filters;
 using System.Web.Http.Results;
 using WebAPI.SignatureTypes;
 
-namespace WebAPI.Attributes
+namespace WebAPI.ActionFilters
 {
     public class TokenRequired : Attribute, IAuthenticationFilter
     {

@@ -4,7 +4,7 @@ using System.Security.Claims;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 
-namespace WebAPI.Attributes
+namespace WebAPI.ActionFilters
 {
     public class AdminOnly : AuthorizeAttribute
     {

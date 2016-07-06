@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Security.Cryptography;
 using System.Web.Http;
-using WebAPI.Attributes;
+using WebAPI.ActionFilters;
 using WebAPI.SignatureTypes;
 
 namespace WebAPI
