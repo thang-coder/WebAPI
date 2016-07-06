@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="class TokenValidationParameters">
+    <Position X="11.594" Y="1.875" Height="0.323" Width="2.096" />
+  </Comment>
+  <Comment CommentText="class JwtSecurityTokenHandler">
+    <Position X="11.583" Y="1.448" Height="0.323" Width="2.106" />
+  </Comment>
+  <Comment CommentText="namespace System.IdentityModel.Tokens.Jwt">
+    <Position X="11.583" Y="1.031" Height="0.323" Width="3.325" />
+  </Comment>
+  <Class Name="WebAPI.ActionFilters.AdminOnly">
+    <Position X="4.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ActionFilters\AdminOnly.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebAPI.ActionFilters.TokenRequired">
+    <Position X="6.75" Y="1" Width="1.75" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="WebAPI.ActionFilters.TokenRequired.ChallengeResult" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>ActionFilters\TokenRequired.cs</NewMemberFileName>
+        </TypeIdentifier>
+        <Lollipop Position="0.2" />
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAIAAAAAAAAAAAEAAASAAAAAABAABA=</HashCode>
+      <FileName>ActionFilters\TokenRequired.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="WebAPI.SignatureTypes.HmacSignatureFactory">
+    <Position X="9" Y="1" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAAABAAAAAAAAEAAAEAAAAAAAAAIAAIACA=</HashCode>
+      <FileName>SignatureTypes\HmacSignatureFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
