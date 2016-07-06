@@ -71,12 +71,12 @@ namespace WebAPI.ActionFilters
         /// </summary>
         public Task AuthenticateAsync(HttpAuthenticationContext context, CancellationToken cancellationToken)
         {
-            AuthenticationHeaderValue authentication = null;
-            SecurityToken securityToken = null;
-
             Trace.Assert(TokenValidator != null, "TokenValidator is required for authentication");
             Trace.Assert(TokenValidations != null, "TokenValidations are required for authentication");
 
+
+            AuthenticationHeaderValue authentication = null;
+            SecurityToken securityToken = null;
             try
             {
                 authentication = context.Request.Headers.Authorization;
