@@ -7,14 +7,17 @@ using System.Text;
 
 namespace WebAPI.SignatureTypes
 {
-    public class Hmac
+    public class HmacSignatureFactory
     {
         // The hash function gets replaced every time the secret string changes.
         private static HMACSHA256 hashFunction;
 
+        // The signing and verifying key gets replaced every time the secret string changes.
+        private static SymmetricSecurityKey signingAndVerifyingKey;
+
         private static string secret;
 
-        static Hmac()
+        static HmacSignatureFactory()
         {
             ValidationParameters = new TokenValidationParameters
             {
@@ -38,12 +41,15 @@ namespace WebAPI.SignatureTypes
 
                 secret = value;
                 hashFunction = new HMACSHA256(Convert.FromBase64String(value));
+                signingAndVerifyingKey = new SymmetricSecurityKey(hashFunction.Key);
+
+                Trace.Assert(hashFunction.Key.Length > 127, "The algorithm: 'http://www.w3.org/2001/04/xmldsig-more#hmac-sha256' cannot have less than: '128' bits.");
             }
         }
 
         public static TokenValidationParameters ValidationParameters { get; internal set; }
 
-        private static string ComputeSignature(JwtSecurityToken jwt)
+        private static string CreateSignature(JwtSecurityToken jwt)
         {
             if (jwt == null)
             {
@@ -64,7 +70,7 @@ namespace WebAPI.SignatureTypes
             try
             {
                 jwt = new JwtSecurityToken(token);
-                computedSignature = ComputeSignature(jwt);
+                computedSignature = CreateSignature(jwt);
             }
             catch (Exception error)
             {

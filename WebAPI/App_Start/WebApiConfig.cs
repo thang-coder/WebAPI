@@ -11,7 +11,7 @@ namespace WebAPI
         public static void Register(HttpConfiguration config)
         {
             // Authentication configurations
-            Hmac.Secret = "THIS IS A BIG SECRET"; // TODO: load secret string from config file
+            HmacSignatureFactory.Secret = "THIS IS A BIG SECRET"; // TODO: load secret string from config file
 
             // there is no specific order for Use and Realm
             TokenRequired.Use(typeof(HMACSHA256));

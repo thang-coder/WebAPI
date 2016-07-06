@@ -11,8 +11,8 @@ namespace WebAPI.Attributes
         public override void OnAuthorization(HttpActionContext actionContext)
         {
             var principal = actionContext.RequestContext.Principal as ClaimsPrincipal;
-            var role = principal?.FindFirst(ClaimTypes.Role)?.Value;
-            if (principal != null && string.Compare(role, "AdministratorRole") == 0)
+            var adminClaim = principal?.FindFirst("admin")?.Value;
+            if (principal != null && string.Compare(adminClaim, bool.TrueString, ignoreCase: true) == 0)
             {
                 base.OnAuthorization(actionContext);
                 return;

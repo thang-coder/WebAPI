@@ -36,7 +36,7 @@ namespace WebAPI.Attributes
         {
             var map = new Dictionary<Type, TokenValidationParameters>
             {
-                [typeof(HMACSHA256)] = Hmac.ValidationParameters
+                [typeof(HMACSHA256)] = HmacSignatureFactory.ValidationParameters
             };
 
             TokenValidationParameters validations = null;
