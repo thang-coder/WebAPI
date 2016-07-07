@@ -19,7 +19,7 @@ namespace WebAPI.ActionFilters
                 return;
             }
 
-            actionContext.Response = actionContext.Request.CreateResponse(HttpStatusCode.Unauthorized);
+            actionContext.Response = actionContext.Request.CreateResponse(HttpStatusCode.Forbidden);
         }
     }
 }
