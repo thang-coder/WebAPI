@@ -1,6 +1,7 @@
 ﻿'use strict';
 
 (function() {
+
     const URL_VALUES = 'api/Values';
     const URL_PROTECTED_VALUES = 'api/ProtectedValues';
     const JWT_ADMIN_FALSE = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkY3RoYW5nQGdtYWlsLmNvbSIsIm5hbWUiOiJUaGFuZyBEdW9uZyIsImFkbWluIjpmYWxzZX0.K3cIOfqduZcb1NmKXrOpxOy1z58MmahFaPgOkd2Swxw';
@@ -13,9 +14,11 @@
     const USER_TOKEN = Symbol('Token Type');
     const ADMIN_TOKEN = Symbol('Token Type');
 
-    const log = console.log.bind(console);
-
+    // an ever-increasing count to make POST data unique for api/ProtectedValues
     let count = 9999;
+
+    // polyfill + short-hand method for console.log
+    const log = console.log.bind(console);
 
     class FetchParameterFactory {
         static createData(data) {
@@ -55,7 +58,7 @@
                     })
                 }
             }, {
-                symbol: USER_TOKEN,
+                symbol: ADMIN_TOKEN,
                 options: {
                     headers: new Headers({
                         'Authorization': `Bearer ${JWT_ADMIN_TRUE}`
