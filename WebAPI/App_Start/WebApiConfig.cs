@@ -11,11 +11,11 @@ namespace WebAPI
         public static void Register(HttpConfiguration config)
         {
             // Configure the hashing function, then use it
-            HmacSignatureFactory.Secret = "eyJzdWIiOiJkY3RoYW5nQGdtYWlsLmNvbSIsIm5hbWUiOiJUaGFuZyBEdW9uZyIsImFkbWluIjp0cnVlfQ";
+            HmacSignatureFactory.Secret = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ";
             TokenRequired.Use(typeof(HMACSHA256));
 
             // Configure the realm for challenge responses
-            TokenRequired.Realm = new Uri("http://localhost:6301");
+            TokenRequired.Realm = new Uri("http://JSONWebToken.azurewebsites.net");
 
             // Web API routes
             config.MapHttpAttributeRoutes();
