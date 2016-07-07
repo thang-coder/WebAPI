@@ -15,3 +15,8 @@ select,
 textarea {
     max-width: 280px;
 }
+
+code {
+    white-space: normal;
+    word-break: break-all;
+}
