@@ -22,7 +22,7 @@ namespace WebAPI.Controllers
 
         [AdminOnly]
         // POST api/ProtectedValues
-        public string Post(string value)
+        public string Post([FromBody] string value)
         {
             protectedValues.Add(value);
             return value;
