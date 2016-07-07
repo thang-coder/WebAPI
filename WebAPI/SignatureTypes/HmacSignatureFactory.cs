@@ -12,7 +12,7 @@ namespace WebAPI.SignatureTypes
         // The hash function gets replaced every time the secret string changes.
         private static HMACSHA256 hashFunction;
 
-        private static string secret;
+        internal static string secret;
 
         // The signing and verifying key gets replaced every time the secret string changes.
         private static SymmetricSecurityKey signingAndVerifyingKey;

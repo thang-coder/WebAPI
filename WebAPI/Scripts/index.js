@@ -148,7 +148,6 @@
 
     const pageController = new PageController({
         btnAnonymousGet: [GET, API_VALUES],
-        btnAnonymousPost: [POST, API_VALUES],
         btnUnauthenticatedGet: [GET, API_PROTECTED_VALUES],
         btnAuthenticatedGet: [GET, USER_TOKEN, API_PROTECTED_VALUES],
         btnUnauthorizedPOST: [POST, USER_TOKEN, API_PROTECTED_VALUES],

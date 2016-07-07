@@ -3,7 +3,7 @@ using System.Web.Http;
 
 namespace WebAPI.Controllers
 {
-    // Authorization not required
+    // Authentication and authorization are not required
     public class ValuesController : ApiController
     {
         // GET api/Values

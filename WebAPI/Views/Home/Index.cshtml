@@ -11,28 +11,33 @@
         <p>
             The <code>api/Values</code> resource does not require any authentication or authorization.
         </p>
-        <p><a class="btn btn-success" href="#" id="btnAnonymousGet">Make anonymous GET&nbsp; request</a></p>
-        <p><a class="btn btn-success" href="#" id="btnAnonymousPost">Make anonymous POST request</a></p>
+        <p><a class="btn btn-success btn-sm" href="#" id="btnAnonymousGet">Make anonymous GET request</a></p>
     </div>
     <div class="col-md-4">
         <h2>Authentication</h2>
         <p>
-            The <code>api/ProtectedValues</code> resource requires a JSON Web Token using the HTTP Authorization header.
+            The <code>api/ProtectedValues</code> resource requires a JSON Web Token for all <code>GET</code> requests.
         </p>
-        <p><a class="btn btn-warning" href="#" id="btnUnauthenticatedGet">Make anonymous GET request</a></p>
-        <p><a class="btn btn-success" href="#" id="btnAuthenticatedGet">Make authenticated GET request</a></p>
+        <p><a class="btn btn-success btn-sm" href="#" id="btnAuthenticatedGet">Make authenticated GET request</a></p>
+        <p><a class="btn btn-danger btn-sm" href="#" id="btnUnauthenticatedGet">Make anonymous GET request</a></p>
     </div>
     <div class="col-md-4">
         <h2>Authorization</h2>
         <p>
-            The <code>api/ProtectedValues</code> resource requires <code>"admin"=true</code> claim.
+            Additionally, the <code>api/ProtectedValues</code> resource requires the <code>"admin": true</code> claim for all <code>POST</code> requests.
         </p>
 
-        <p><a class="btn btn-warning" href="#" id="btnUnauthorizedPOST">Make unauthorized POST request</a></p>
-        <p><a class="btn btn-success" href="#" id="btnAuthorizedPOST">Make admin POST request</a></p>
+        <p><a class="btn btn-success btn-sm" href="#" id="btnAuthorizedPOST">Make admin POST request</a></p>
+        <p><a class="btn btn-danger btn-sm" href="#" id="btnUnauthorizedPOST">Make unauthorized POST request</a></p>
     </div>
+</div>
+<br />
+<div class="alert alert-info">
+    <p>
+        <code>Secret = @WebAPI.SignatureTypes.HmacSignatureFactory.Secret</code>
+    </p>
 </div>
 
 @section scripts {
-@Scripts.Render("~/Scripts/index.js")
+    @Scripts.Render("~/Scripts/index.js")
 }
