@@ -21,9 +21,21 @@
     const log = console.log.bind(console);
 
     class FetchParameterFactory {
-        static createData(data) {
+
+        /**
+        * @param {string} data - the data to be embeded in the body of the POST request
+        */
+        static createUrlSearchParam(text) {
+            const dataType = typeof text;
+            if (dataType !== 'string') {
+                throw new Error(`Invalid argument type. A string is expected but the actual type is: ${dataType}`);
+            }
+
             const param = new URLSearchParams();
-            Object.keys(data).forEach(key => param.append(key, data[key]));
+            // The client needs to send the value with the following format:
+            //    =value
+            // according to http://www.asp.net/web-api/overview/advanced/sending-html-form-data-part-1
+            param.append('', text);
             return param;
         }
 
@@ -48,7 +60,7 @@
                 symbol: POST,
                 options: {
                     method: 'POST',
-                    body: FetchParameterFactory.createData({ value: `gold ${count++}` })
+                    body: FetchParameterFactory.createUrlSearchParam(`gold ${count++}`)
                 }
             }, {
                 symbol: USER_TOKEN,
